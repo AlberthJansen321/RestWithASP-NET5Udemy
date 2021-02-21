@@ -36,6 +36,7 @@ namespace RestWithASPNET5Udemy.Controllers
                     decimal soma = decimal.Parse(firstnumber.Replace(".", ",")) + decimal.Parse(secondnumber.Replace(".", ","));
                     decimal multiplicacao = decimal.Parse(firstnumber.Replace(".", ",")) * decimal.Parse(secondnumber.Replace(".", ","));
                     decimal subtracao = decimal.Parse(firstnumber.Replace(".", ",")) - decimal.Parse(secondnumber.Replace(".", ","));
+                    
 
                     return Ok($"O resultado da soma é igual a: {soma} \n" +
                        $"O resultado da subtração é igual a: {subtracao} \n" +
@@ -130,6 +131,24 @@ namespace RestWithASPNET5Udemy.Controllers
 
 
                 return Ok($"O resultado da multiplicação é igual: {multiplicacao}");
+            }
+
+            return BadRequest("Valor Inválido");
+        }
+        [HttpGet("rq/{firstnumber}")]
+        public IActionResult Rq(string firstnumber)
+        {
+            var numeros = firstnumber;
+            decimal numero = 0;
+
+
+            if (decimal.TryParse(numeros, out numero))
+            {
+
+                decimal raizQuadrada = (decimal)Math.Sqrt(float.Parse(firstnumber));
+
+
+                return Ok($"O resultado da raiz quadrada do número {firstnumber} é igual: {raizQuadrada}");
             }
 
             return BadRequest("Valor Inválido");
